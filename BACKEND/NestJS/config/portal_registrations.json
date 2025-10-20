@@ -1,0 +1,15 @@
+[
+  {
+    "ts": "2025-10-20T14:29:24.491Z",
+    "name": "",
+    "email": "test@mail.com",
+    "phone": "",
+    "accept_terms": true,
+    "ap_mac": "",
+    "essid": "",
+    "client_mac": "",
+    "ip": "127.0.0.1",
+    "user_agent": "curl/8.14.1",
+    "referrer": ""
+  }
+]
