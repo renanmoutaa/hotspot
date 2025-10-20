@@ -1,0 +1,14 @@
+{
+  "unifiUrl": "https://172.27.1.248:8443",
+  "unifiUser": "renan",
+  "unifiPass": "M0ut@123",
+  "radiusHost": "localhost",
+  "radiusSecret": "",
+  "controllerVendor": "unifi",
+  "portalApMac": "9c:05:d6:b2:e7:5d",
+  "portalSsid": "Visitantes",
+  "unifiSite": "default",
+  "portalApMacs": [
+    "9c:05:d6:b2:e7:5d"
+  ]
+}

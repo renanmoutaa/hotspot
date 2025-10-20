@@ -1,0 +1,30 @@
+{
+  "name": "hotspot-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^6.1.0",
+    "antd": "^5.27.5",
+    "axios": "^1.4.0",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.24",
+    "grapesjs": "^0.22.13",
+    "grapesjs-preset-webpage": "^1.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.21",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^4.3.9"
+  }
+}
