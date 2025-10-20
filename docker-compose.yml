@@ -85,6 +85,36 @@ services:
       - postgres
       - redis
 
+  # UniFi Network Application (Controller)
+  unifi:
+    container_name: UniFi
+    image: jacobalberty/unifi:latest
+    environment:
+      TZ: ${TZ:-UTC}
+    volumes:
+      - unifi_data:/unifi
+    ports:
+      - "8443:8443"   # Web UI (HTTPS)
+      - "8080:8080"   # Device inform
+      - "3478:3478/udp" # STUN
+      - "10001:10001/udp" # Discovery
+      - "8880:8880"   # Portal HTTP
+      - "8843:8843"   # Portal HTTPS
+      - "6789:6789"   # Speedtest
+    restart: unless-stopped
+
+  # FreeRADIUS server
+  freeradius:
+    container_name: FreeRADIUS
+    image: networkradius/freeradius-server:latest
+    environment:
+      TZ: ${TZ:-UTC}
+    ports:
+      - "1812:1812/udp"  # RADIUS auth
+      - "1813:1813/udp"  # RADIUS acct
+    restart: unless-stopped
+
 volumes:
   postgres_data:
   redis_data:
+  unifi_data:
