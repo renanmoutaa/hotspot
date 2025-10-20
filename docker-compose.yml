@@ -106,7 +106,7 @@ services:
   # FreeRADIUS server
   freeradius:
     container_name: FreeRADIUS
-    image: networkradius/freeradius-server:latest
+    image: freeradius/freeradius-server:latest
     environment:
       TZ: ${TZ:-UTC}
     ports:
