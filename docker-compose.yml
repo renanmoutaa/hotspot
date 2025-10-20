@@ -65,7 +65,7 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
-    command: sh -c "[ -f package-lock.json ] && npm ci || npm install && npm run dev"
+    command: sh -c "[ -f package-lock.json ] && npm ci || npm install; (npm run dev || (npx tsc -p tsconfig.json && node dist/main.js))"
     restart: unless-stopped
     depends_on:
       - postgres
@@ -80,7 +80,7 @@ services:
       - ./BACKEND/FastAPI:/app
     ports:
       - "3001:3001"
-    command: sh -c "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi && python -m uvicorn main:app --host 0.0.0.0 --port 3001 --reload"
+    command: sh -c "if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt || pip install --no-cache-dir fastapi uvicorn; else pip install --no-cache-dir fastapi uvicorn; fi && python -m uvicorn main:app --host 0.0.0.0 --port 3001 --reload"
     restart: unless-stopped
     depends_on:
       - postgres
