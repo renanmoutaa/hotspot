@@ -54,7 +54,7 @@ async function bootstrap() {
   expressApp.get('/terms', serveTerms);
   expressApp.get('/authorized', serveAuthorized);
   
-  const PORT = parseInt(process.env.API_PORT || '80', 10);
+  const PORT = parseInt(process.env.API_PORT || process.env.PORT || '3000', 10);
   await app.listen(PORT, '0.0.0.0');
   console.log(`Nest API rodando em http://localhost:${PORT}/api`);
 }
