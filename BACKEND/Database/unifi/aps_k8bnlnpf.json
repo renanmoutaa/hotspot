@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "name": "AP-TESTE-PORTAL",
+      "mac": "d8:b3:70:b9:cb:b5",
+      "ip": "172.23.0.243",
+      "model": "U7MSH",
+      "version": "6.6.77.15402",
+      "status": "up",
+      "is_portal": false,
+      "site": "k8bnlnpf"
+    }
+  ],
+  "total": 1,
+  "site": "k8bnlnpf",
+  "updatedAt": "2025-10-20T20:19:55.730Z"
+}

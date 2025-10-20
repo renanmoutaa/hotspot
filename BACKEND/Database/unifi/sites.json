@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "id": "5fbdbad64ffda01a1d348b48",
+      "name": "default",
+      "desc": "SEC",
+      "role": "admin",
+      "site": "default"
+    },
+    {
+      "id": "68f648cb5368bd6a4332d048",
+      "name": "k8bnlnpf",
+      "desc": "hotspotsite",
+      "role": "admin",
+      "site": "k8bnlnpf"
+    }
+  ],
+  "total": 2,
+  "updatedAt": "2025-10-20T20:19:53.743Z"
+}

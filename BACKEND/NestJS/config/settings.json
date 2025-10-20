@@ -5,10 +5,10 @@
   "radiusHost": "localhost",
   "radiusSecret": "",
   "controllerVendor": "unifi",
-  "portalApMac": "9c:05:d6:b2:e7:5d",
-  "portalSsid": "Visitantes",
-  "unifiSite": "default",
+  "portalApMac": "d8:b3:70:b9:cb:b5",
+  "portalSsid": "WIFI FREE",
+  "unifiSite": "hotspotsite",
   "portalApMacs": [
-    "9c:05:d6:b2:e7:5d"
+    "d8:b3:70:b9:cb:b5"
   ]
 }

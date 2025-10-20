@@ -1,0 +1,15 @@
+{
+  "items": [
+    {
+      "name": "WIFI FREE",
+      "enabled": true,
+      "security": "open",
+      "vlan_id": null,
+      "is_guest": true,
+      "site": "k8bnlnpf"
+    }
+  ],
+  "total": 1,
+  "site": "k8bnlnpf",
+  "updatedAt": "2025-10-20T20:19:57.727Z"
+}

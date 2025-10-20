@@ -17,6 +17,7 @@ const Wifi: React.FC = () => {
   const [loadingCfg, setLoadingCfg] = useState<boolean>(false);
   const [testedOk, setTestedOk] = useState<boolean>(false);
 
+  const [sites, setSites] = useState<any[]>([]);
   const [aps, setAps] = useState<any[]>([]);
   const [ssids, setSsids] = useState<any[]>([]);
   const [selAps, setSelAps] = useState<string[]>([]);
@@ -46,16 +47,40 @@ const Wifi: React.FC = () => {
     finally { setLoadingCfg(false); }
   };
 
+  const currentSite = () => (form.getFieldValue('unifiSite') as string) || undefined;
+
+  const loadSites = async () => {
+    try {
+      const res = await apiNest.get('/unifi/sites');
+      const items = res.data?.items || [];
+      setSites(items);
+
+      // alinhar valor do formulário com o "site code" usado pela API
+      const cur = currentSite();
+      if (cur) {
+        const exists = items.some((it: any) => it.site === cur);
+        if (!exists) {
+          const guess = items.find((it: any) => it.name === cur || it.desc === cur);
+          if (guess?.site) form.setFieldsValue({ unifiSite: guess.site });
+        }
+      } else if (items.length > 0) {
+        form.setFieldsValue({ unifiSite: items[0].site });
+      }
+    } catch { message.error('Falha ao carregar sites'); }
+  };
+
   const loadAps = async () => {
     try {
-      const res = await apiNest.get('/unifi/aps');
+      const site = currentSite();
+      const res = await apiNest.get('/unifi/aps', site ? { params: { site } } : undefined);
       setAps(res.data?.items || []);
     } catch { message.error('Falha ao carregar APs'); }
   };
 
   const loadSsids = async () => {
     try {
-      const res = await apiNest.get('/unifi/ssids');
+      const site = currentSite();
+      const res = await apiNest.get('/unifi/ssids', site ? { params: { site } } : undefined);
       setSsids(res.data?.items || []);
     } catch { message.error('Falha ao carregar redes Wi‑Fi'); }
   };
@@ -78,6 +103,7 @@ const Wifi: React.FC = () => {
       if (res.data?.ok) {
         setTestedOk(true);
         message.success('UniFi OK');
+        await loadSites();
         await loadAps();
         await loadSsids();
       } else {
@@ -112,9 +138,17 @@ const Wifi: React.FC = () => {
                 <Input placeholder="https://unifi.local:8443" />
               </Form.Item>
               <Form.Item label="Site UniFi" name="unifiSite" rules={[{ required: true, message: 'Informe o site UniFi' }]}>
-                <Input placeholder="default" />
+                {sites.length > 0 ? (
+                  <Select
+                    placeholder="Selecione um site"
+                    options={(sites || []).map((s: any) => ({ label: s.desc || s.name || s.site, value: s.site || s.name }))}
+                    showSearch
+                  />
+                ) : (
+                  <Input placeholder="default" />
+                )}
               </Form.Item>
-              <Form.Item label="Usuário UniFi" name="unifiUser" rules={[{ required: true, message: 'Informe o usuário' }]}>
+              <Form.Item label="Usuário UniFi" name="unifiUser" rules={[{ required: true, message: 'Informe o usuário' }]}> 
                 <Input />
               </Form.Item>
               <Form.Item label="Senha UniFi" name="unifiPass" rules={[{ required: true, message: 'Informe a senha' }]}>
@@ -123,6 +157,7 @@ const Wifi: React.FC = () => {
               <Space>
                 <Button type="primary" onClick={saveUnifiCfg}>Salvar Controladora</Button>
                 <Button onClick={testUnifi}>Testar UniFi</Button>
+                <Button onClick={loadSites}>Carregar Sites</Button>
               </Space>
             </Form>
 
